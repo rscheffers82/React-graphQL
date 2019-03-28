@@ -1,0 +1,10 @@
+{
+  "C:\\d-data\\Web-courses\\0-Projects\\00-React\\13-bos-advanced-react\\sick-fits\\frontend\\noop": [
+    {
+      "id": "./node_modules/next/dist/client/noop.js",
+      "name": "./node_modules/next/dist/client/noop.js",
+      "file": "static/chunks/0.js",
+      "publicPath": "static/chunks/0.js"
+    }
+  ]
+}
