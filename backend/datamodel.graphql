@@ -3,3 +3,15 @@ type User {
     name: String!
     email: String!
 }
+
+type Item {
+    id: ID! @unique
+    title: String!
+    description: String!
+    image: String
+    largeImage: String
+    price: Int!
+    createdAt: DateTime!        # DateTime is a type that prisma provides. When not using Prisma, create your own type if dates are needed
+    updatedAt: DateTime!        # same as above
+    # user: User!
+}
