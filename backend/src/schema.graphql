@@ -1,0 +1,18 @@
+# Specify in the Schema what will be visible to your API, public facing API
+
+# The below imports all types as already defined in the generated Prisma file.
+# import * from './generated/prisma.graphql'
+
+type Mutation {
+    createItem(
+        title: String,
+        description: String,
+        price: Int
+        image: String,
+        largeImage: String
+    ) : Item!
+}
+
+type Query {
+    items: [Item]!
+}
