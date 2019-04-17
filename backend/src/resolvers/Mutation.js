@@ -12,7 +12,7 @@ const Mutations = {
         }, info);
 
         return item;
-    }
+    },
     // createDog(parent, args, ctx, info) {
     //     global.dogs = global.dogs || [];
     //     const newDog = {
@@ -21,6 +21,21 @@ const Mutations = {
     //     global.dogs.push(newDog);
     //     return newDog;
     // }
+    async updateItem(parent, args, ctx, info) {
+        // take a copy of the updates
+        const updates = { ... args };
+        // remove the ID from the updates
+        delete updates.id;
+        // run the update method
+        const updatedItem = await ctx.db.mutation.updateItem({
+            data: updates,
+            where: {
+                id: args.id,
+            }
+        }, info);
+        // return the updated item
+        return updatedItem;
+    }
 };
 
 module.exports = Mutations;

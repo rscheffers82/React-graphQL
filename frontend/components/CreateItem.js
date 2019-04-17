@@ -35,11 +35,11 @@ const CREATE_ITEM_MUTATION = gql`
 
 class CreateItem extends Component {
     state = {
-        title: 'Cool shoes',
-        description: 'Some really awesome wanderers',
+        title: '',
+        description: '',
         image: undefined,
-        largeImage: 'large-shoes.jpg',
-        price: 2499,
+        largeImage: '',
+        price: undefined,
     }
 
     handleChange = e => {
@@ -129,7 +129,7 @@ class CreateItem extends Component {
                                 placeholder="price"
                                 required
                                 onChange={this.handleChange}
-                                value={this.state.price}
+                                value={this.state.price || ''}
                             />
                             </label>
         
