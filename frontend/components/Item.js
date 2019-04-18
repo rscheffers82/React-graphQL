@@ -21,8 +21,7 @@ export default class Item extends Component {
   }
 
   render() {
-      const { id, title, description, image, imageLarge, price } = this.props.item;
-    console.log(image);
+    const { id, title, description, image, imageLarge, price } = this.props.item;
     return (
       <ItemStyles>
           {image && <img src={image} alt={description} />}
@@ -46,7 +45,6 @@ export default class Item extends Component {
             <button>Add To Cart ➕</button>
             <DeleteItem id={id} />
           </div>
-
       </ItemStyles>
     )
   }
