@@ -7,6 +7,8 @@ import Link from 'next/link'
 import { perPage } from '../config'
 import PaginationStyles from './styles/PaginationStyles'
 
+// TODO: Currently there is no good way to refetch the pagination when an item is added or removed. The GraphQL team is working on a solution and as one comes out. This can be implemented in this app.
+
 const PAGINATION_QUERY = gql`
     query PAGINATION_QUERY {
         itemsConnection {
