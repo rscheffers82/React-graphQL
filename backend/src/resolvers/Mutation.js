@@ -35,6 +35,17 @@ const Mutations = {
         }, info);
         // return the updated item
         return updatedItem;
+    },
+    async deleteItem(parent, args, ctx, info) {
+        const where = { id: args.id }
+        // 1. find the item
+        // Instead of passing info object, we pass our own GraphQL query as this is an intermediate query instead of the final one
+        const item = await ctx.db.query.item({ where }, `{ id title }`);
+        // 2. Check if they own that item, or have permissions to delete it
+        // TODO: add auth logic
+        // 3. Delete it!
+        const deleteItem = await ctx.db.mutation.deleteItem({ where }, info);
+        return deleteItem;
     }
 };
 
