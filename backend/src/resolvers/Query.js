@@ -7,10 +7,13 @@ const Query = {
     // This is the case when no authentication or data manipulation is needed.
     items: forwardTo('db'),
     // The above is the same as the below items function.
-    async items(parent, args, ctx, info) {
-        const items = await ctx.db.query.items();
-        return items;
-    },
+    // async items(parent, args, ctx, info) {
+    //     const items = await ctx.db.query.items();
+    //     return items;
+    // },
+    item: forwardTo('db'),
+    itemsConnection: forwardTo('db'),
+
 };
 
 module.exports = Query;

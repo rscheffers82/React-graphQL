@@ -1,10 +1,9 @@
 import Link from 'next/link';
+import Items from '../components/Items';
 
-const Home = () => (
+const Home = props => (
   <div>
-    <Link href="/sell">
-      <a>Sell</a>
-    </Link>
+    <Items page={parseFloat(props.query.page) || 1} />
   </div>
 );
 
