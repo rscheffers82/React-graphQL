@@ -1,5 +1,8 @@
 // Resolver file, logic for the mutations
 
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 const Mutations = {
     // info contains the query from the front-end. This is needed to the backend and therefore added tot he createItem function.
     async createItem(parent, args, ctx, info) {
@@ -46,7 +49,28 @@ const Mutations = {
         // 3. Delete it!
         const deleteItem = await ctx.db.mutation.deleteItem({ where }, info);
         return deleteItem;
-    }
+    },
+    async signup(parent, args, ctx, info) {
+        args.email = args.email.toLowerCase();
+        // hash user password
+        const password = await bcrypt.hash(args.password, 10);
+        const user = await ctx.db.mutation.createUser({
+            data: {
+                ...args,
+                password,
+                permissions: { set: ['USER'] }      // because permissions is an enum, use set to define its value
+            }
+        }, info);
+        // create the JWT token
+        const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+        // set the jwt as a cookie on the response
+        ctx.response.cookie('token', token, {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
+        });
+        // Finally return the user to the browser
+        return user;
+    },
 };
 
 module.exports = Mutations;

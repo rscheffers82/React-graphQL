@@ -1,17 +1,33 @@
+# An enum is a preset list of possible options for a type.
+enum Permission {
+    ADMIN
+    USER
+    ITEMCREATE
+    ITEMUPDATE
+    ITEMDELETE
+    PERMISSIONUPDATE
+}
+
 type User {
-    id: ID! @unique
+    id: ID! @id
     name: String!
-    email: String!
+    email: String! @unique
+    password: String!
+    resetToken: String
+    resetTokenExpiry: Float
+    permissions: [Permission] @scalarList(strategy:RELATION)
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime! @updatedAt
 }
 
 type Item {
-    id: ID! @unique
+    id: ID! @id
     title: String!
     description: String!
     image: String
     largeImage: String
     price: Int!
-    createdAt: DateTime!        # DateTime is a type that prisma provides. When not using Prisma, create your own type if dates are needed
-    updatedAt: DateTime!        # same as above
-    # user: User!
+    createdAt: DateTime! @createdAt       # DateTime is a type that prisma provides. When not using Prisma, create your own type if dates are needed
+    updatedAt: DateTime! @updatedAt       # same as above
+    user: User!
 }
